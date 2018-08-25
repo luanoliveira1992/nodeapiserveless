@@ -1,0 +1,20 @@
+{
+  "name": "node-api-express",
+  "version": "1.0.0",
+  "description": "basic struct",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luan oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "is-number": "^7.0.0",
+    "serverless-domain-manager": "^2.6.0",
+    "serverless-http": "^1.6.0",
+    "serverless-offline": "^3.25.8",
+    "uuid": "^3.3.2"
+  }
+}

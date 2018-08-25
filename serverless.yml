@@ -1,0 +1,51 @@
+service: node-express-api-serverless
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128
+  stage: dev
+  region: ${self:custom.regions.${self:provider.stage}}
+  profile: ${self:custom.profiles.${self:provider.stage}}
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    ACCOUNT_ID: ${self:custom.AWS_CONF.${self:provider.profile}.account_id}
+    SERVICE: ${self:service}
+    LOCAL: false
+  role: ${self:custom.AWS_CONF.${self:provider.profile}.role}
+  timeout: 180
+custom:
+  profiles:
+    dev: yourprofile
+    hml: yourprofile
+    prd: yourprofile
+    preprd: yourprofile
+    
+    
+
+  regions:
+    dev: yourregion
+    hml: yourregion
+    prd: yourregion
+    preprd: yourregion
+
+  AWS_CONF:
+    yourprofile:
+      account_id: youraccontid
+      customDomain:
+        domainName: putyourdomainhere 
+      bucketPrefix: yourbucketprefix
+      imageHandler: neededbucketprefix
+   
+  
+plugins:
+  - serverless-offline
+  - serverless-domain-manager
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
